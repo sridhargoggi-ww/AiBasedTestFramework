@@ -1,0 +1,15 @@
+# Core AI/LLM
+gpt4all==2.8.2
+
+# Web/Automation Testing
+playwright==1.57.0
+
+# Data Validation
+pydantic==2.12.5
+
+# HTTP Requests
+requests==2.32.5
+
+# Optional: For Jira/ADO integrations (uncomment if needed)
+# jira==3.13.0
+# azure-devops==7.1.0rc1
