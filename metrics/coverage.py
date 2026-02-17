@@ -22,9 +22,14 @@ class CoverageTracker:
         high_risk_manual = 0
         high_risk_automation = 0
         for f in (self.artifact_path / "manual").glob("*.json"):
-            data = json.load(open(f))
-            if data.get("risk") == "High":
-                high_risk_manual += 1
+            try:
+                with open(f) as file:
+                    data = json.load(file)
+                    if data.get("risk") == "High":
+                        high_risk_manual += 1
+            except (json.JSONDecodeError, ValueError):
+                # Skip invalid or empty JSON files
+                pass
         for f in (self.artifact_path / "automation").glob("*.py"):
             if "LOGIN" in f.name:  # demo heuristic
                 high_risk_automation += 1
