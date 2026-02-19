@@ -9,27 +9,8 @@ from config import *
 # Initialize Jira Client
 jira = JiraClient(JIRA_URL, JIRA_EMAIL, JIRA_API_TOKEN, JIRA_PROJECT)
 
-# Use demo requirement instead of fetching from Jira
-USE_DEMO_REQUIREMENT = True
-
-if USE_DEMO_REQUIREMENT:
-    requirements = [{
-        "key": "LOGIN_001",
-        "summary": "User Login",
-        "description": """
-        As a user, I want to login.
-
-        Acceptance Criteria:
-        1. User can login with valid credentials
-        2. Invalid login shows error to retry login or click forget password
-        3. Successful login redirects to dashboard
-        4. forget password redirects to reset password page
-        5. User session persists after login
-        6. Login page has 'Remember Me' option
-        """
-    }]
-else:
-    requirements = jira.get_stories()
+# Fetch requirements from Jira
+requirements = jira.get_stories()
 
 analyzer = RequirementAnalyzer()
 tracker = CoverageTracker(TEST_ARTIFACT_PATH)

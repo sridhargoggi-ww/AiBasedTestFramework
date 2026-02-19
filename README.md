@@ -32,7 +32,7 @@ python run_agent.py
 ```
 
 The agent will:
-- Analyze requirements from hardcoded demo data (currently)
+- Fetch requirements from Jira (requires valid credentials in config.py)
 - Use gpt4all (local LLM) to extract acceptance criteria
 - Generate manual and automation test cases
 - Save artifacts to `test_artifacts/`

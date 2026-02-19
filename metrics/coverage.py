@@ -31,6 +31,6 @@ class CoverageTracker:
                 # Skip invalid or empty JSON files
                 pass
         for f in (self.artifact_path / "automation").glob("*.py"):
-            if "LOGIN" in f.name:  # demo heuristic
+            if "LOGIN" in f.name:  # heuristic for identifying critical auth tests
                 high_risk_automation += 1
         return round((high_risk_automation / high_risk_manual * 100) if high_risk_manual else 0, 2)
