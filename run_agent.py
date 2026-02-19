@@ -1,10 +1,14 @@
 import os
 import json
+from dotenv import load_dotenv
 from integrations.jira_client import JiraClient
 from ai_agents.requirement_analyzer import RequirementAnalyzer
 from ai_agents.test_generator import generate_tests
 from metrics.coverage import CoverageTracker
 from config import *
+
+# Load environment variables from .env file
+load_dotenv()
 
 # Initialize Jira Client
 jira = JiraClient(JIRA_URL, JIRA_EMAIL, JIRA_API_TOKEN, JIRA_PROJECT)

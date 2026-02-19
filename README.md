@@ -26,16 +26,36 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-4. **Run the test generation agent:**
+4. **Configure Jira credentials:**
+   - Copy `.env.example` to `.env`
+   - Edit `.env` and add your Jira credentials:
+     ```bash
+     JIRA_URL=https://yourcompany.atlassian.net
+     JIRA_EMAIL=your-email@company.com
+     JIRA_API_TOKEN=<get-from-jira-account-settings>
+     JIRA_PROJECT=YOUR_PROJECT_KEY
+     ```
+   - **⚠️ Important:** `.env` is in `.gitignore` and will never be committed
+   - Get your API token: Jira → Account Settings → Security → API tokens
+
+5. **Run the test generation agent:**
 ```bash
 python run_agent.py
 ```
 
 The agent will:
-- Fetch requirements from Jira (requires valid credentials in config.py)
+- Fetch requirements from Jira using your credentials
 - Use gpt4all (local LLM) to extract acceptance criteria
 - Generate manual and automation test cases
 - Save artifacts to `test_artifacts/`
+
+### To use with Azure DevOps instead:
+Add these environment variables to your `.env` file:
+```bash
+ADO_ORG_URL=https://dev.azure.com/your-org
+ADO_PROJECT=YourProject
+ADO_PAT=<your-personal-access-token>
+```
 
 ## 📁 Project Structure
 
@@ -62,7 +82,22 @@ The agent will:
 ✅ **Regression Tagging** - Tests are tagged as regression for CI/CD  
 ✅ **Playwright Integration** - Auto-generates browser automation scripts  
 
-## 🔧 Configuration
+## � Security & Credentials
+
+**IMPORTANT:** Never commit credentials to GitHub!
+
+- ✅ Use `.env` file for local development (in `.gitignore`)
+- ✅ Set environment variables in CI/CD pipelines
+- ✅ Rotate API tokens regularly
+- ✅ Use minimal permission API tokens
+
+**Generating Jira API Token:**
+1. Go to https://id.atlassian.com/manage/api-tokens
+2. Click "Create API token"
+3. Copy the token to your `.env` file
+4. Never share or commit the token
+
+## �🔧 Configuration
 
 Edit `config.py` to customize:
 - Test artifact path
