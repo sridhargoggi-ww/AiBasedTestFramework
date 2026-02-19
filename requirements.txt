@@ -10,7 +10,7 @@ pydantic==2.12.5
 # HTTP Requests
 requests==2.32.5
 
-# Environment variable management
+# Credential management
 python-dotenv==1.0.1
 
 # Optional: For Jira/ADO integrations (uncomment if needed)
